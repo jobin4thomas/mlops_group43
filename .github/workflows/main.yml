@@ -21,7 +21,7 @@ jobs:
       - name: Format
         run: black *.py
       - name: Train
-        run: python train.py
+        run: python age_model.py
       - name: Evaluation
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
