@@ -10,8 +10,8 @@ data = pd.read_csv("age_prediction_dataset.csv")
 
 # For simplicity, let's use the existing features without additional engineering
 # Split the data into features and target
-X = df.drop(['ID', 'Age', 'Age_group'], axis=1)
-y = df['Age']
+X = data.drop(['ID', 'Age', 'Age_group'], axis=1)
+y = data['Age']
 
 # Split the data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
