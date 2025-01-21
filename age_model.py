@@ -3,6 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score, accuracy_score, f1_score, confusion_matrix, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
+import joblib
 
 # Load data from Kaggle 
 # (Note: You'll need to download the dataset and provide the local path)
@@ -66,3 +67,7 @@ disp.plot()
 plt.savefig("age_pred_model_results.png", dpi=120)
 
 
+# Save the trained model using joblib
+filename = 'age_prediction_model.joblib' 
+joblib.dump(clf, filename) 
+print(f"Model saved to {filename}")
