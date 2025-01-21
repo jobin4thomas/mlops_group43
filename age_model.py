@@ -8,15 +8,17 @@ import matplotlib.pyplot as plt
 # (Note: You'll need to download the dataset and provide the local path)
 data = pd.read_csv("age_prediction_dataset.csv") 
 
-# Separate features and target variable
-features = data.drop("Age", axis=1)
-target = data["Age"]
+# For simplicity, let's use the existing features without additional engineering
+# Split the data into features and target
+X = df.drop(['ID', 'Age', 'Age_group'], axis=1)
+y = df['Age']
 
-# Split data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.2)
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
 
 # Create a Random Forest Regressor model
-model = RandomForestRegressor()
+model = RandomForestRegressor(random_state=42)
 
 # Train the model
 model.fit(X_train, y_train)
