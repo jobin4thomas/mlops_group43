@@ -1,9 +1,11 @@
 name: Group 43 CI CD Workflow
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
   workflow_dispatch:
   
 permissions: write-all
@@ -12,12 +14,24 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v3
         with:
           lfs: true
       - uses: iterative/setup-cml@v2
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
       - name: Install Packages
         run: pip install --upgrade pip && pip install -r requirements.txt
+      
+      - name: Lint Code
+        run: flake8 .
+
+      - name: Run Tests
+        run: pytest
+        
       - name: Format
         run: black *.py
       - name: Train
@@ -31,5 +45,7 @@ jobs:
             
           echo '## Confusion Matrix Plot' >> report.md
           echo '![Confusion Matrix](age_pred_model_results.png)' >> report.md
+      - name: Deploy Model
+        run: python age_model.py
 
           cml comment create report.md
