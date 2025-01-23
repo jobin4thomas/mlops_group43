@@ -58,7 +58,7 @@ accuracy = accuracy_score(y_test_cat, y_pred_cat)
 f1 = f1_score(y_test_cat, y_pred_cat, average='weighted')
 print(f"Accuracy: {accuracy}")
 print(f"F1-score: {f1}")
-## Write metrics to file
+# Write metrics to file
 with open("metrics.txt", "w") as outfile:
     outfile.write(f"\nAccuracy = {round(accuracy, 2)}, "
                   f"F1 Score = {round(f1, 2)}\n\n")
