@@ -25,17 +25,14 @@ jobs:
           python-version: '3.10'
       - name: Install Packages
         run: pip install --upgrade pip && pip install -r requirements.txt
-      
       - name: Lint Code
         run: flake8 .
-
-      - name: Run Tests
-        run: pytest
-        
-      - name: Format
+      - name: Format Code
         run: black *.py
       - name: Train
         run: python age_model.py
+      - name: Run Tests
+        run: pytest age_model_test.py
       - name: Evaluation
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
