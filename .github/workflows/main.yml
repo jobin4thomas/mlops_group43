@@ -33,16 +33,15 @@ jobs:
         run: python age_model.py
       - name: Run Tests
         run: pytest age_model_test.py
-      - name: Evaluation
+      - name: Deploy Model
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: | 
+          python age_model.py
           echo "## Model Metrics" > report.md
           cat metrics.txt >> report.md
             
           echo '## Confusion Matrix Plot' >> report.md
           echo '![Confusion Matrix](age_pred_model_results.png)' >> report.md
-      - name: Deploy Model
-        run: python age_model.py
 
           cml comment create report.md
